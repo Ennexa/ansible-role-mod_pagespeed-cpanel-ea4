@@ -1,0 +1,30 @@
+---
+- name: add mod_pagespeed repo
+  yum_repository:
+    name: mod-pagespeed
+    description: mod-pagespeed
+    baseurl: "http://dl.google.com/linux/mod-pagespeed/rpm/stable/x86_64"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+
+- copy:
+    src: httpd.rpm
+    dest: "{{ ansible_env.HOME}}"
+    mode: 0644
+
+- name: install dependency - at
+  yum:
+    name: at
+    state: installed
+
+- name: install dependency - httpd (dummy)
+  yum:
+    name: "{{ ansible_env.HOME }}/httpd.rpm"
+    state: present
+
+- name: install package
+  yum:
+    name: mod-pagespeed-stable
+    state: present
+    
