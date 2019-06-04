@@ -16,7 +16,7 @@
 - name: install dependency - at
   yum:
     name: at
-    state: installed
+    state: present
 
 - name: install dependency - httpd (dummy)
   yum:
@@ -27,4 +27,3 @@
   yum:
     name: mod-pagespeed-stable
     state: present
-    
